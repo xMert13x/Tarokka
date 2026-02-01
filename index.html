@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarokka Deck</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="top-left-content">
+            <div class="deck-container">
+                <div id="deck" class="deck">
+                    <div class="card-back"></div>
+                </div>
+            </div>
+        </div>
+        <div class="spread-container">
+            <div class="card-slot" id="slot-top" data-tooltip="This card tells of a powerful force for good and protection, a holy symbol of great hope." data-slot="top"></div>
+            <div class="card-slot" id="slot-left" data-tooltip="This card tells of history. Knowledge of the ancient will help you better understand your enemy." data-slot="left"></div>
+            <div class="card-slot" id="slot-center" data-tooltip="Your enemy is a creature of darkness, whose powers are beyond mortality. This card will lead you to him!" data-slot="center"></div>
+            <div class="card-slot" id="slot-right" data-tooltip="This is a card of power and strength. It tells of a weapon of vengeance: a sword of sunlight." data-slot="right"></div>
+            <div class="card-slot" id="slot-bottom" data-tooltip="This card sheds light on one who will help you greatly in the battle against darkness." data-slot="bottom"></div>
+        </div>
+    </div>
+    <!-- Card selection modal -->
+    <div id="cardSelectionModal" class="modal">
+        <div class="modal-content">
+            <div id="modalHeader" class="modal-header">
+                <h2>Select a Card</h2>
+                <button id="closeModal" class="close-btn">×</button>
+            </div>
+            <div id="modalBody" class="modal-body">
+                <!-- Content will be dynamically generated -->
+            </div>
+        </div>
+    </div>
+    <!-- Context menu for revealed cards -->
+    <div id="contextMenu" class="context-menu">
+        <div class="context-menu-item" id="dealNewCard">Deal New Card</div>
+        <div class="context-menu-item" id="chooseFromMenu">Choose from Menu</div>
+    </div>
+    <!-- Information button -->
+    <div class="info-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="16" x2="12" y2="12"></line>
+            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+        </svg>
+        <div class="info-tooltip">
+            <h3>Tarokka Deck Features</h3>
+            <ul>
+                <li><strong>Deal Cards:</strong> Click deck or press <kbd>D</kbd></li>
+                <li><strong>Reveal Cards:</strong> Click on cards or press:
+                    <ul>
+                        <li><kbd>1</kbd> - Left slot</li>
+                        <li><kbd>2</kbd> - Top slot</li>
+                        <li><kbd>3</kbd> - Right slot</li>
+                        <li><kbd>4</kbd> - Bottom slot</li>
+                        <li><kbd>5</kbd> - Center slot</li>
+                    </ul>
+                </li>
+                <li><strong>Reset Cards:</strong> Press <kbd>R</kbd> to clear all slots</li>
+                <li><strong>Right-Click Menu:</strong>
+                    <ul>
+                        <li>Deal New Card: Replaces with random card</li>
+                        <li>Choose from Menu: Select specific card</li>
+                    </ul>
+                </li>
+                <li><strong>Tooltips:</strong>
+                    <ul>
+                        <li>Hover over empty slot or unrevealed cards for slot descriptions</li>
+                        <li>Hover over revealed cards for card descriptions</li>
+                    </ul>
+                </li>
+                <li><strong>Toggle Text Descriptions:</strong> Press <kbd>T</kbd></li>
+                <li><strong>Fullscreen:</strong> Click fullscreen button or press <kbd>F</kbd></li>
+            </ul>
+        </div>
+    </div>
+    
+    <!-- Fullscreen button -->
+    <button id="fullscreenBtn" class="fullscreen-btn" title="Toggle Fullscreen (F)">
+        <svg class="fullscreen-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+        </svg>
+        <svg class="exit-fullscreen-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2 2h3M3 16h3a2 2 0 0 1 2 2v3"></path>
+        </svg>
+    </button>
+    <script src="script.js"></script>
+</body>
+</html>
