@@ -568,16 +568,16 @@ body {
     position: absolute;
     top: 70px;
     right: 10px;
-    width: 320px;
+    width: 300px;
     max-width: 90vw;
     background: rgba(0, 0, 0, 0.9);
     color: #ffffff;
-    padding: 20px;
+    padding: 15px;
     border-radius: 8px;
     border: 2px solid #8b4513;
     font-family: 'Times New Roman', serif;
-    font-size: 14px;
-    line-height: 1.5;
+    font-size: 13px;
+    line-height: 1.4;
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;
@@ -585,6 +585,8 @@ body {
     z-index: 1100;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+    max-height: 70vh;
+    overflow-y: auto;
 }
 
 .info-tooltip.visible {
@@ -616,12 +618,12 @@ body {
 
 .info-tooltip h3 {
     margin-top: 0;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
     color: #ffd700;
     text-align: center;
-    font-size: 16px;
+    font-size: 15px;
     border-bottom: 1px solid #8b4513;
-    padding-bottom: 8px;
+    padding-bottom: 6px;
 }
 
 .info-tooltip ul {
@@ -630,7 +632,7 @@ body {
 }
 
 .info-tooltip li {
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
 .info-tooltip ul ul {
@@ -641,17 +643,17 @@ body {
 .info-tooltip kbd {
     background-color: #f5f5f5;
     color: #333;
-    padding: 2px 6px;
-    border-radius: 4px;
+    padding: 1px 4px;
+    border-radius: 3px;
     border: 1px solid #666;
     font-family: monospace;
-    font-size: 12px;
+    font-size: 11px;
 }
 
 /* Help toggle styles */
 .help-toggle {
-    margin-top: 15px;
-    padding-top: 10px;
+    margin-top: 12px;
+    padding-top: 8px;
     border-top: 1px solid #ddd;
     text-align: right;
 }
@@ -660,7 +662,7 @@ body {
     color: #c9a227;
     cursor: pointer;
     font-weight: 600;
-    font-size: 13px;
+    font-size: 12px;
     text-decoration: underline;
     transition: color 0.2s ease;
 }
