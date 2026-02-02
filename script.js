@@ -395,8 +395,10 @@ function clearSlots() {
 }
 
 async function shuffleAndDeal() {
-    // Check if cards have already been dealt
-    if (cardsDealt) {
+    // Check if any slots have cards
+    const hasCardsInSlots = Object.values(slots).some(slot => slot.children.length > 0);
+    
+    if (hasCardsInSlots) {
         // Show confirmation dialog
         const confirmed = confirm('Are you sure you wish to change the fates?');
         if (!confirmed) {
