@@ -251,13 +251,13 @@ body {
 
 #slot-left {
     top: 410px;
-    left: calc(42.5% - 25%);
+    left: 162px;
     transform: translateY(-50%);
 }
 
 #slot-right {
     top: 410px;
-    left: calc(42.5% + 25%);
+    right: 350px;
     transform: translateY(-50%);
 }
 
@@ -271,6 +271,17 @@ body {
     top: 408px;
     left: 42.5%;
     transform: translate(-50%, -50%);
+}
+
+/* Responsive fix for iPad and tablet screens */
+@media (max-width: 1200px) {
+    #slot-left {
+        left: 10%;
+    }
+    
+    #slot-right {
+        right: 10%;
+    }
 }
 
 /* Modal styles */
