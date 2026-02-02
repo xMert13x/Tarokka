@@ -461,8 +461,9 @@ function showDescriptionSelectionModal(card, slot) {
 // Function to select a description
 function selectDescription(description, index) {
     if (currentDescriptionSlot && currentDescriptionCard) {
-        currentDescriptionSlot.dataset.tooltip = description;
-        currentDescriptionCard.dataset.selectedDescription = index;
+        // Store the selected description on the card, not the slot
+        currentDescriptionCard.dataset.selectedDescription = description;
+        currentDescriptionCard.dataset.selectedDescriptionIndex = index;
     }
     closeDescriptionSelectionModal();
 }
@@ -588,8 +589,11 @@ function revealCardInSlot(slotId) {
                 // Store original tooltip
                 slot.dataset.originalTooltip = slot.dataset.tooltip;
                 
-                // Check if card has multiple descriptions
-                if (hasMultipleDescriptions(cardName, slotId)) {
+                // Check if card has a pre-selected description
+                if (card.dataset.selectedDescription) {
+                    // Use the pre-selected description
+                    slot.dataset.tooltip = card.dataset.selectedDescription;
+                } else if (hasMultipleDescriptions(cardName, slotId)) {
                     // Show description selection modal
                     showDescriptionSelectionModal(card, slot);
                 } else {
