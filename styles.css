@@ -251,13 +251,13 @@ body {
 
 #slot-left {
     top: 410px;
-    left: 162px;
+    left: calc(42.5% - 25%);
     transform: translateY(-50%);
 }
 
 #slot-right {
     top: 410px;
-    right: 350px;
+    left: calc(42.5% + 25%);
     transform: translateY(-50%);
 }
 
