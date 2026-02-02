@@ -715,8 +715,8 @@ function handleTwoFingerPress(e) {
     const card = target.closest('.card');
     
     if (slot && !card) {
-        // Two-finger press on empty slot - show tooltip
-        slot.classList.add('show-tooltip');
+        // Two-finger press on empty slot - show card selection modal
+        showCardSelectionModal(slot);
     } else if (slot && card) {
         // Two-finger press on card - check if it's revealed
         const isRevealed = card.classList.contains('flipped');
