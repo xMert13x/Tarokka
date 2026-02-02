@@ -627,50 +627,96 @@ window.addEventListener('click', (event) => {
 addSlotClickListeners();
 
 // Touch device support variables
-let longPressTimer;
-const LONG_PRESS_DELAY = 500; // ms
+let touchStartX = [];
+let touchStartY = [];
+const TWO_FINGER_DELAY = 500; // ms
+let twoFingerTimer;
 
 // Touch event handlers for cards
 function addTouchEventHandlers() {
     const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        card.addEventListener('touchstart', (e) => {
-            longPressTimer = setTimeout(() => {
-                showContextMenu(e.touches[0], card);
-            }, LONG_PRESS_DELAY);
-        });
-        
-        card.addEventListener('touchend', () => {
-            clearTimeout(longPressTimer);
-        });
-        
-        card.addEventListener('touchmove', () => {
-            clearTimeout(longPressTimer);
-        });
+    const slots = document.querySelectorAll('.card-slot');
+    
+    // Add touch handlers to all cards and slots
+    [...cards, ...slots].forEach(element => {
+        element.addEventListener('touchstart', handleTouchStart, { passive: false });
+        element.addEventListener('touchend', handleTouchEnd);
+        element.addEventListener('touchmove', handleTouchMove);
+        element.addEventListener('touchcancel', handleTouchEnd);
     });
+}
+
+// Handle touch start event
+function handleTouchStart(e) {
+    // Prevent default to avoid iOS menu on long press
+    if (e.touches.length === 1) {
+        // Single touch - allow default for card flipping
+        return;
+    } else if (e.touches.length === 2) {
+        // Two-finger touch - prevent default to avoid iOS menu
+        e.preventDefault();
+        
+        // Store touch positions
+        touchStartX = [e.touches[0].pageX, e.touches[1].pageX];
+        touchStartY = [e.touches[0].pageY, e.touches[1].pageY];
+        
+        // Clear any existing timer
+        clearTimeout(twoFingerTimer);
+        
+        // Set timer for two-finger press
+        twoFingerTimer = setTimeout(() => {
+            handleTwoFingerPress(e);
+        }, TWO_FINGER_DELAY);
+    }
+}
+
+// Handle touch move event
+function handleTouchMove(e) {
+    // Clear timer if user moves fingers
+    if (e.touches.length === 2) {
+        clearTimeout(twoFingerTimer);
+    }
+}
+
+// Handle touch end event
+function handleTouchEnd() {
+    // Clear timer when touch ends
+    clearTimeout(twoFingerTimer);
+}
+
+// Handle two-finger press
+function handleTwoFingerPress(e) {
+    const target = e.target.closest('.card-slot, .card');
+    if (!target) return;
+    
+    const slot = target.closest('.card-slot');
+    const card = target.closest('.card');
+    
+    if (slot && !card) {
+        // Two-finger press on empty slot - show tooltip
+        slot.classList.add('show-tooltip');
+    } else if (slot && card) {
+        // Two-finger press on card - check if it's revealed
+        const isRevealed = card.classList.contains('flipped');
+        
+        if (!isRevealed) {
+            // Two-finger press on unrevealed card - show slot tooltip
+            slot.classList.add('show-tooltip');
+        } else {
+            // Two-finger press on revealed card - show context menu
+            showContextMenu(e.touches[0], card);
+        }
+    }
 }
 
 // Touch device tooltip support
 function addTooltipTouchSupport() {
     const slots = document.querySelectorAll('.card-slot');
-    let lastTapTime = 0;
-    const DOUBLE_TAP_DELAY = 300; // ms
     
     slots.forEach(slot => {
         slot.addEventListener('touchstart', (e) => {
-            const currentTime = new Date().getTime();
-            const tapLength = currentTime - lastTapTime;
-            
-            if (tapLength < DOUBLE_TAP_DELAY && tapLength > 0) {
-                // Double tap detected
-                e.preventDefault();
-                slot.classList.toggle('show-tooltip');
-            }
-            
-            lastTapTime = currentTime;
-            
-            // Single tap on empty slot shows tooltip
-            if (!slot.querySelector('.card')) {
+            // Only show tooltip on empty slots with single tap
+            if (e.touches.length === 1 && !slot.querySelector('.card')) {
                 e.preventDefault();
                 // Show tooltip on touch
                 slot.classList.add('show-tooltip');
