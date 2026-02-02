@@ -715,7 +715,12 @@ function handleTwoFingerPress(e) {
     const card = target.closest('.card');
     
     if (slot && !card) {
-        // Two-finger press on empty slot - show card selection modal
+        // Two-finger press on empty slot - hide tooltips and show card selection modal
+        // Hide all tooltips first
+        document.querySelectorAll('.card-slot.show-tooltip').forEach(s => {
+            s.classList.remove('show-tooltip');
+        });
+        // Show card selection modal
         showCardSelectionModal(slot);
     } else if (slot && card) {
         // Two-finger press on card - check if it's revealed
