@@ -852,6 +852,36 @@ const desktopHelp = document.getElementById('desktopHelp');
 const touchHelp = document.getElementById('touchHelp');
 const showTouchHelp = document.getElementById('showTouchHelp');
 const showDesktopHelp = document.getElementById('showDesktopHelp');
+const infoBtn = document.querySelector('.info-btn');
+
+// Toggle help menu on click
+infoBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isVisible = desktopHelp.classList.contains('visible') || touchHelp.classList.contains('visible');
+    
+    if (isVisible) {
+        desktopHelp.classList.remove('visible');
+        touchHelp.classList.remove('visible');
+    } else {
+        desktopHelp.classList.add('visible');
+    }
+});
+
+// Close help menu when clicking outside
+document.addEventListener('click', (e) => {
+    if (!e.target.closest('.info-btn') && !e.target.closest('.info-tooltip')) {
+        desktopHelp.classList.remove('visible');
+        touchHelp.classList.remove('visible');
+    }
+});
+
+// Close help menu when tapping outside (touch devices)
+document.addEventListener('touchstart', (e) => {
+    if (!e.target.closest('.info-btn') && !e.target.closest('.info-tooltip')) {
+        desktopHelp.classList.remove('visible');
+        touchHelp.classList.remove('visible');
+    }
+});
 
 // Show touchscreen help
 showTouchHelp.addEventListener('click', (e) => {
