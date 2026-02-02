@@ -595,13 +595,34 @@ body {
 }
 
 .info-tooltip kbd {
-    background-color: #444;
-    color: #ffd700;
+    background-color: #f5f5f5;
+    color: #333;
     padding: 2px 6px;
     border-radius: 4px;
     border: 1px solid #666;
     font-family: monospace;
     font-size: 12px;
+}
+
+/* Help toggle styles */
+.help-toggle {
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px solid #ddd;
+    text-align: right;
+}
+
+.toggle-link {
+    color: #c9a227;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 13px;
+    text-decoration: underline;
+    transition: color 0.2s ease;
+}
+
+.toggle-link:hover {
+    color: #a08010;
 }
 
 /* Responsive adjustments for tooltip */

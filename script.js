@@ -846,3 +846,21 @@ document.addEventListener('keydown', (event) => {
         }
     }
 });
+
+// Help menu toggle functionality
+const desktopHelp = document.getElementById('desktopHelp');
+const touchHelp = document.getElementById('touchHelp');
+const showTouchHelp = document.getElementById('showTouchHelp');
+const showDesktopHelp = document.getElementById('showDesktopHelp');
+
+// Show touchscreen help
+showTouchHelp.addEventListener('click', () => {
+    desktopHelp.style.display = 'none';
+    touchHelp.style.display = 'block';
+});
+
+// Show desktop help
+showDesktopHelp.addEventListener('click', () => {
+    touchHelp.style.display = 'none';
+    desktopHelp.style.display = 'block';
+});

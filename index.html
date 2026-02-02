@@ -47,7 +47,7 @@
             <line x1="12" y1="16" x2="12" y2="12"></line>
             <line x1="12" y1="8" x2="12.01" y2="8"></line>
         </svg>
-        <div class="info-tooltip">
+        <div class="info-tooltip" id="desktopHelp">
             <h3>Tarokka Deck Features</h3>
             <ul>
                 <li><strong>Deal Cards:</strong> Click deck or press <kbd>D</kbd></li>
@@ -76,6 +76,36 @@
                 <li><strong>Toggle Text Descriptions:</strong> Press <kbd>T</kbd></li>
                 <li><strong>Fullscreen:</strong> Click fullscreen button or press <kbd>F</kbd></li>
             </ul>
+            <div class="help-toggle">
+                <span class="toggle-link" id="showTouchHelp">Touchscreen</span>
+            </div>
+        </div>
+        <div class="info-tooltip" id="touchHelp" style="display: none;">
+            <h3>Touchscreen Features</h3>
+            <ul>
+                <li><strong>Deal Cards:</strong> Tap deck</li>
+                <li><strong>Reveal Cards:</strong> Single tap on cards</li>
+                <li><strong>Reset Cards:</strong> Press <kbd>R</kbd> to clear all slots</li>
+                <li><strong>Two-Finger Press (500ms):</strong>
+                    <ul>
+                        <li>On empty slot: Show slot description</li>
+                        <li>On unrevealed card: Show slot description (without revealing)</li>
+                        <li>On revealed card: Show context menu (Deal New Card / Choose from Menu)</li>
+                    </ul>
+                </li>
+                <li><strong>Tooltips:</strong>
+                    <ul>
+                        <li>Single tap on empty slot for slot descriptions</li>
+                        <li>Two-finger press on unrevealed card for slot descriptions</li>
+                        <li>Two-finger press on revealed card for card descriptions</li>
+                    </ul>
+                </li>
+                <li><strong>Toggle Text Descriptions:</strong> Press <kbd>T</kbd></li>
+                <li><strong>Fullscreen:</strong> Tap fullscreen button or press <kbd>F</kbd></li>
+            </ul>
+            <div class="help-toggle">
+                <span class="toggle-link" id="showDesktopHelp">Desktop</span>
+            </div>
         </div>
     </div>
     
