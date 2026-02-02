@@ -535,11 +535,6 @@ body {
     box-shadow: 0 6px 20px rgba(201, 162, 39, 0.6);
 }
 
-.info-btn:hover .info-tooltip {
-    opacity: 0;
-    visibility: hidden;
-}
-
 .info-btn svg {
     width: 24px;
     height: 24px;
@@ -573,6 +568,27 @@ body {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
+}
+
+/* Help toggle styles */
+.help-toggle {
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px solid #8b4513;
+    text-align: right;
+}
+
+.toggle-link {
+    color: #c9a227;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 13px;
+    text-decoration: underline;
+    transition: color 0.2s ease;
+}
+
+.toggle-link:hover {
+    color: #a08010;
 }
 
 .info-tooltip h3 {

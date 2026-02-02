@@ -47,64 +47,66 @@
             <line x1="12" y1="16" x2="12" y2="12"></line>
             <line x1="12" y1="8" x2="12.01" y2="8"></line>
         </svg>
-        <div class="info-tooltip" id="desktopHelp">
-            <h3>Tarokka Deck Features</h3>
-            <ul>
-                <li><strong>Deal Cards:</strong> Click deck or press <kbd>D</kbd></li>
-                <li><strong>Reveal Cards:</strong> Click on cards or press:
-                    <ul>
-                        <li><kbd>1</kbd> - Left slot</li>
-                        <li><kbd>2</kbd> - Top slot</li>
-                        <li><kbd>3</kbd> - Right slot</li>
-                        <li><kbd>4</kbd> - Bottom slot</li>
-                        <li><kbd>5</kbd> - Center slot</li>
-                    </ul>
-                </li>
-                <li><strong>Reset Cards:</strong> Press <kbd>R</kbd> to clear all slots</li>
-                <li><strong>Right-Click Menu:</strong>
-                    <ul>
-                        <li>Deal New Card: Replaces with random card</li>
-                        <li>Choose from Menu: Select specific card</li>
-                    </ul>
-                </li>
-                <li><strong>Tooltips:</strong>
-                    <ul>
-                        <li>Hover over empty slot or unrevealed cards for slot descriptions</li>
-                        <li>Hover over revealed cards for card descriptions</li>
-                    </ul>
-                </li>
-                <li><strong>Toggle Text Descriptions:</strong> Press <kbd>T</kbd></li>
-                <li><strong>Fullscreen:</strong> Click fullscreen button or press <kbd>F</kbd></li>
-            </ul>
-            <div class="help-toggle">
-                <span class="toggle-link" id="showTouchHelp">Touchscreen</span>
+        <div class="info-tooltip">
+            <div id="desktopHelp">
+                <h3>Desktop Features</h3>
+                <ul>
+                    <li><strong>Deal Cards:</strong> Click deck or press <kbd>D</kbd></li>
+                    <li><strong>Reveal Cards:</strong> Click on cards or press:
+                        <ul>
+                            <li><kbd>1</kbd> - Left slot</li>
+                            <li><kbd>2</kbd> - Top slot</li>
+                            <li><kbd>3</kbd> - Right slot</li>
+                            <li><kbd>4</kbd> - Bottom slot</li>
+                            <li><kbd>5</kbd> - Center slot</li>
+                        </ul>
+                    </li>
+                    <li><strong>Reset Cards:</strong> Press <kbd>R</kbd> to clear all slots</li>
+                    <li><strong>Right-Click Menu:</strong>
+                        <ul>
+                            <li>Deal New Card: Replaces with random card</li>
+                            <li>Choose from Menu: Select specific card</li>
+                        </ul>
+                    </li>
+                    <li><strong>Tooltips:</strong>
+                        <ul>
+                            <li>Hover over empty slot or unrevealed cards for slot descriptions</li>
+                            <li>Hover over revealed cards for card descriptions</li>
+                        </ul>
+                    </li>
+                    <li><strong>Toggle Text Descriptions:</strong> Press <kbd>T</kbd></li>
+                    <li><strong>Fullscreen:</strong> Click fullscreen button or press <kbd>F</kbd></li>
+                </ul>
             </div>
-        </div>
-        <div class="info-tooltip" id="touchHelp">
-            <h3>Touchscreen Features</h3>
-            <ul>
-                <li><strong>Deal Cards:</strong> Tap deck</li>
-                <li><strong>Reveal Cards:</strong> Single tap on cards</li>
-                <li><strong>Reset Cards:</strong> Press <kbd>R</kbd> to clear all slots</li>
-                <li><strong>Two-Finger Press (500ms):</strong>
-                    <ul>
-                        <li>On empty slot: Show slot description</li>
-                        <li>On unrevealed card: Show slot description (without revealing)</li>
-                        <li>On revealed card: Show context menu (Deal New Card / Choose from Menu)</li>
-                    </ul>
-                </li>
-                <li><strong>Tooltips:</strong>
-                    <ul>
-                        <li>Single tap on empty slot for slot descriptions</li>
-                        <li>Two-finger press on unrevealed card for slot descriptions</li>
-                        <li>Two-finger press on revealed card for card descriptions</li>
-                    </ul>
-                </li>
-                <li><strong>Toggle Text Descriptions:</strong> Press <kbd>T</kbd></li>
-                <li><strong>Fullscreen:</strong> Tap fullscreen button or press <kbd>F</kbd></li>
-            </ul>
+            <div id="touchHelp" style="display: none;">
+                <h3>Touchscreen Features</h3>
+                <ul>
+                    <li><strong>Deal Cards:</strong> Tap deck</li>
+                    <li><strong>Show slot description:</strong>
+                        <ul>
+                            <li>Tap empty slot</li>
+                            <li>Two finger press on unrevealed card</li>
+                        </ul>
+                    </li>
+                    <li><strong>Show card description:</strong>
+                        <ul>
+                            <li>Tap to reveal card</li>
+                        </ul>
+                    </li>
+                    <li><strong>Deal new card or choose new card:</strong>
+                        <ul>
+                            <li>Two finger press on revealed card</li>
+                        </ul>
+                    </li>
+                    <li><strong>Hide text:</strong>
+                        <ul>
+                            <li>Click anywhere on screen</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
             <div class="help-toggle">
-                <span class="toggle-link" id="showDesktopHelp">Desktop</span>
+                <span class="toggle-link" id="helpToggle">Touchscreen</span>
             </div>
         </div>
     </div>

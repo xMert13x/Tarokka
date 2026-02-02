@@ -848,66 +848,67 @@ document.addEventListener('keydown', (event) => {
 });
 
 // Help menu toggle functionality
+const infoBtn = document.querySelector('.info-btn');
+const infoTooltip = document.querySelector('.info-tooltip');
 const desktopHelp = document.getElementById('desktopHelp');
 const touchHelp = document.getElementById('touchHelp');
-const showTouchHelp = document.getElementById('showTouchHelp');
-const showDesktopHelp = document.getElementById('showDesktopHelp');
-const infoBtn = document.querySelector('.info-btn');
+const helpToggle = document.getElementById('helpToggle');
 
-// Initially hide both help menus
-desktopHelp.classList.remove('visible');
-touchHelp.classList.remove('visible');
+// Track current help mode
+let isDesktopMode = true;
 
 // Toggle help menu on click
 infoBtn.addEventListener('click', (e) => {
     e.stopPropagation();
-    
-    // Check if any help menu is visible
-    const isVisible = desktopHelp.classList.contains('visible') || touchHelp.classList.contains('visible');
-    
-    if (isVisible) {
-        // If visible, hide both
-        desktopHelp.classList.remove('visible');
-        touchHelp.classList.remove('visible');
-    } else {
-        // If not visible, show desktop help
-        desktopHelp.classList.add('visible');
-        touchHelp.classList.remove('visible');
-    }
+    infoTooltip.classList.toggle('visible');
 });
 
 // Close help menu when clicking outside
 document.addEventListener('click', (e) => {
     if (!e.target.closest('.info-btn') && !e.target.closest('.info-tooltip')) {
-        desktopHelp.classList.remove('visible');
-        touchHelp.classList.remove('visible');
+        infoTooltip.classList.remove('visible');
     }
 });
 
 // Close help menu when tapping outside (touch devices)
 document.addEventListener('touchstart', (e) => {
     if (!e.target.closest('.info-btn') && !e.target.closest('.info-tooltip')) {
-        desktopHelp.classList.remove('visible');
-        touchHelp.classList.remove('visible');
+        infoTooltip.classList.remove('visible');
     }
 });
 
-// Show touchscreen help
-showTouchHelp.addEventListener('click', (e) => {
+// Toggle between desktop and touchscreen help
+helpToggle.addEventListener('click', (e) => {
     e.preventDefault();
     e.stopPropagation();
     
-    // Hide desktop help, show touchscreen help
-    desktopHelp.classList.remove('visible');
-    touchHelp.classList.add('visible');
+    isDesktopMode = !isDesktopMode;
+    
+    if (isDesktopMode) {
+        desktopHelp.style.display = 'block';
+        touchHelp.style.display = 'none';
+        helpToggle.textContent = 'Touchscreen';
+    } else {
+        desktopHelp.style.display = 'none';
+        touchHelp.style.display = 'block';
+        helpToggle.textContent = 'Desktop';
+    }
 });
 
-// Show desktop help
-showDesktopHelp.addEventListener('click', (e) => {
+// Also handle touch events for the toggle
+helpToggle.addEventListener('touchstart', (e) => {
     e.preventDefault();
     e.stopPropagation();
     
-    // Hide touchscreen help, show desktop help
-    touchHelp.classList.remove('visible');
-    desktopHelp.classList.add('visible');
+    isDesktopMode = !isDesktopMode;
+    
+    if (isDesktopMode) {
+        desktopHelp.style.display = 'block';
+        touchHelp.style.display = 'none';
+        helpToggle.textContent = 'Touchscreen';
+    } else {
+        desktopHelp.style.display = 'none';
+        touchHelp.style.display = 'block';
+        helpToggle.textContent = 'Desktop';
+    }
 });
