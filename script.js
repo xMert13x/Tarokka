@@ -169,6 +169,35 @@ function getCardTooltip(cardName, slotId) {
     return cardTooltips[cardName] || '';
 }
 
+// Function to check if a card has multiple descriptions
+function hasMultipleDescriptions(cardName, slotId) {
+    if (slotId === 'bottom' || slotId === 'center') {
+        const slotSuffix = slotId === 'bottom' ? '-Bottom' : '-Center';
+        const slotTooltipKey = cardName + slotSuffix;
+        if (cardTooltips[slotTooltipKey]) {
+            const tooltip = cardTooltips[slotTooltipKey];
+            return Array.isArray(tooltip) && tooltip.length > 1;
+        }
+    }
+    return false;
+}
+
+// Function to get all descriptions for a card
+function getAllDescriptions(cardName, slotId) {
+    if (slotId === 'bottom' || slotId === 'center') {
+        const slotSuffix = slotId === 'bottom' ? '-Bottom' : '-Center';
+        const slotTooltipKey = cardName + slotSuffix;
+        if (cardTooltips[slotTooltipKey]) {
+            const tooltip = cardTooltips[slotTooltipKey];
+            if (Array.isArray(tooltip)) {
+                return tooltip;
+            }
+            return [tooltip];
+        }
+    }
+    return [cardTooltips[cardName] || ''];
+}
+
 // Helper function to get slot ID from element
 function getSlotId(element) {
     for (const [id, slot] of Object.entries(slots)) {
@@ -392,6 +421,68 @@ const modalBody = document.getElementById('modalBody');
 const closeModal = document.getElementById('closeModal');
 let currentSlot = null;
 
+// Description selection modal elements
+const descriptionModal = document.getElementById('descriptionSelectionModal');
+const descriptionModalBody = document.getElementById('descriptionModalBody');
+const descriptionModalTitle = document.getElementById('descriptionModalTitle');
+const closeDescriptionModal = document.getElementById('closeDescriptionModal');
+let currentDescriptionSlot = null;
+let currentDescriptionCard = null;
+
+// Function to show description selection modal
+function showDescriptionSelectionModal(card, slot) {
+    const cardName = card.dataset.name;
+    const slotId = slot.id.replace('slot-', '');
+    
+    const descriptions = getAllDescriptions(cardName, slotId);
+    
+    if (descriptions.length <= 1) {
+        return; // No need to show modal if only one description
+    }
+    
+    currentDescriptionSlot = slot;
+    currentDescriptionCard = card;
+    
+    descriptionModalTitle.textContent = `Select Description for ${cardName}`;
+    descriptionModalBody.innerHTML = '';
+    
+    descriptions.forEach((description, index) => {
+        const optionDiv = document.createElement('div');
+        optionDiv.className = 'description-option';
+        optionDiv.textContent = description;
+        optionDiv.dataset.descriptionIndex = index;
+        optionDiv.addEventListener('click', () => selectDescription(description, index));
+        descriptionModalBody.appendChild(optionDiv);
+    });
+    
+    descriptionModal.classList.add('visible');
+}
+
+// Function to select a description
+function selectDescription(description, index) {
+    if (currentDescriptionSlot && currentDescriptionCard) {
+        currentDescriptionSlot.dataset.tooltip = description;
+        currentDescriptionCard.dataset.selectedDescription = index;
+    }
+    closeDescriptionSelectionModal();
+}
+
+// Function to close description selection modal
+function closeDescriptionSelectionModal() {
+    descriptionModal.classList.remove('visible');
+    currentDescriptionSlot = null;
+    currentDescriptionCard = null;
+}
+
+// Event listeners for description selection modal
+closeDescriptionModal.addEventListener('click', closeDescriptionSelectionModal);
+
+descriptionModal.addEventListener('click', (e) => {
+    if (e.target === descriptionModal) {
+        closeDescriptionSelectionModal();
+    }
+});
+
 // Track if cards have been dealt
 let cardsDealt = false;
 
@@ -496,21 +587,26 @@ function revealCardInSlot(slotId) {
             if (cardName) {
                 // Store original tooltip
                 slot.dataset.originalTooltip = slot.dataset.tooltip;
-                // Update with card-specific tooltip
                 
-                // Get or generate the card's tooltip (store it on the card for consistency)
-                let cardTooltip;
-                if (card.dataset.storedTooltip) {
-                    // Use previously stored tooltip
-                    cardTooltip = card.dataset.storedTooltip;
+                // Check if card has multiple descriptions
+                if (hasMultipleDescriptions(cardName, slotId)) {
+                    // Show description selection modal
+                    showDescriptionSelectionModal(card, slot);
                 } else {
-                    // Generate new tooltip and store it on the card
-                    cardTooltip = getCardTooltip(cardName, slotId);
-                    card.dataset.storedTooltip = cardTooltip;
-                }
-                
-                if (cardTooltip) {
-                    slot.dataset.tooltip = cardTooltip;
+                    // Update with card-specific tooltip
+                    let cardTooltip;
+                    if (card.dataset.storedTooltip) {
+                        // Use previously stored tooltip
+                        cardTooltip = card.dataset.storedTooltip;
+                    } else {
+                        // Generate new tooltip and store it on the card
+                        cardTooltip = getCardTooltip(cardName, slotId);
+                        card.dataset.storedTooltip = cardTooltip;
+                    }
+                    
+                    if (cardTooltip) {
+                        slot.dataset.tooltip = cardTooltip;
+                    }
                 }
             }
         }
@@ -619,6 +715,16 @@ function selectCard(card) {
         // Reset tooltip to original slot tooltip
         if (currentSlot.dataset.originalTooltip) {
             currentSlot.dataset.tooltip = currentSlot.dataset.originalTooltip;
+        }
+        
+        // Check if card has multiple descriptions
+        const slotId = currentSlot.id.replace('slot-', '');
+        if (hasMultipleDescriptions(card.name, slotId)) {
+            // Store current slot and card for description selection
+            currentDescriptionSlot = currentSlot;
+            currentDescriptionCard = cardElement;
+            // Show description selection modal
+            showDescriptionSelectionModal(cardElement, currentSlot);
         }
         
         // Close modal

@@ -534,6 +534,34 @@ body {
     border-radius: 0 0 8px 8px;
 }
 
+/* Description selection modal styles */
+.description-option {
+    padding: 15px 20px;
+    cursor: pointer;
+    color: #1a1a2e;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    font-size: 14px;
+    line-height: 1.5;
+    border-bottom: 1px solid #e0e0e0;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    background-color: #f9f9f9;
+}
+
+.description-option:hover {
+    background-color: #e8e8e8;
+    color: #0d0d25;
+    font-weight: 600;
+    transform: translateX(5px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.description-option:last-child {
+    margin-bottom: 0;
+    border-bottom: none;
+}
+
 /* Fullscreen button styles */
 .info-btn {
     position: fixed;
