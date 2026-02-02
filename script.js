@@ -854,16 +854,25 @@ const showTouchHelp = document.getElementById('showTouchHelp');
 const showDesktopHelp = document.getElementById('showDesktopHelp');
 const infoBtn = document.querySelector('.info-btn');
 
+// Initially hide both help menus
+desktopHelp.classList.remove('visible');
+touchHelp.classList.remove('visible');
+
 // Toggle help menu on click
 infoBtn.addEventListener('click', (e) => {
     e.stopPropagation();
+    
+    // Check if any help menu is visible
     const isVisible = desktopHelp.classList.contains('visible') || touchHelp.classList.contains('visible');
     
     if (isVisible) {
+        // If visible, hide both
         desktopHelp.classList.remove('visible');
         touchHelp.classList.remove('visible');
     } else {
+        // If not visible, show desktop help
         desktopHelp.classList.add('visible');
+        touchHelp.classList.remove('visible');
     }
 });
 
@@ -887,13 +896,8 @@ document.addEventListener('touchstart', (e) => {
 showTouchHelp.addEventListener('click', (e) => {
     e.preventDefault();
     e.stopPropagation();
-    desktopHelp.classList.remove('visible');
-    touchHelp.classList.add('visible');
-});
-
-showTouchHelp.addEventListener('touchstart', (e) => {
-    e.preventDefault();
-    e.stopPropagation();
+    
+    // Hide desktop help, show touchscreen help
     desktopHelp.classList.remove('visible');
     touchHelp.classList.add('visible');
 });
@@ -902,13 +906,8 @@ showTouchHelp.addEventListener('touchstart', (e) => {
 showDesktopHelp.addEventListener('click', (e) => {
     e.preventDefault();
     e.stopPropagation();
-    touchHelp.classList.remove('visible');
-    desktopHelp.classList.add('visible');
-});
-
-showDesktopHelp.addEventListener('touchstart', (e) => {
-    e.preventDefault();
-    e.stopPropagation();
+    
+    // Hide touchscreen help, show desktop help
     touchHelp.classList.remove('visible');
     desktopHelp.classList.add('visible');
 });
