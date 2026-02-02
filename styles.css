@@ -536,6 +536,11 @@ body {
     box-shadow: 0 6px 20px rgba(201, 162, 39, 0.6);
 }
 
+.info-btn:hover .info-tooltip {
+    opacity: 0;
+    visibility: hidden;
+}
+
 .info-btn svg {
     width: 24px;
     height: 24px;
