@@ -217,13 +217,15 @@ body {
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
 }
 
-.card-slot:hover::after {
+.card-slot:hover::after,
+.card-slot.show-tooltip::after {
     opacity: 1;
     visibility: visible;
     transform: translateX(-50%) scale(1.05);
 }
 
-.card-slot:has(.card:hover)::after {
+.card-slot:has(.card:hover)::after,
+.card-slot.show-tooltip:has(.card)::after {
     bottom: -12px;
 }
 

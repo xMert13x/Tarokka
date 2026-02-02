@@ -384,8 +384,18 @@ function showContextMenu(event, card) {
     const menuWidth = contextMenu.offsetWidth;
     const menuHeight = contextMenu.offsetHeight;
     
-    let x = event.clientX;
-    let y = event.clientY;
+    let x, y;
+    
+    // Handle both mouse and touch events
+    if (event.clientX && event.clientY) {
+        // Mouse event
+        x = event.clientX;
+        y = event.clientY;
+    } else if (event.pageX && event.pageY) {
+        // Touch event
+        x = event.pageX;
+        y = event.pageY;
+    }
     
     if (x + menuWidth > window.innerWidth) {
         x = window.innerWidth - menuWidth - 10;
@@ -615,6 +625,82 @@ window.addEventListener('click', (event) => {
 
 // Add slot click listeners when page loads
 addSlotClickListeners();
+
+// Touch device support variables
+let longPressTimer;
+const LONG_PRESS_DELAY = 500; // ms
+
+// Touch event handlers for cards
+function addTouchEventHandlers() {
+    const cards = document.querySelectorAll('.card');
+    cards.forEach(card => {
+        card.addEventListener('touchstart', (e) => {
+            longPressTimer = setTimeout(() => {
+                showContextMenu(e.touches[0], card);
+            }, LONG_PRESS_DELAY);
+        });
+        
+        card.addEventListener('touchend', () => {
+            clearTimeout(longPressTimer);
+        });
+        
+        card.addEventListener('touchmove', () => {
+            clearTimeout(longPressTimer);
+        });
+    });
+}
+
+// Touch device tooltip support
+function addTooltipTouchSupport() {
+    const slots = document.querySelectorAll('.card-slot');
+    let lastTapTime = 0;
+    const DOUBLE_TAP_DELAY = 300; // ms
+    
+    slots.forEach(slot => {
+        slot.addEventListener('touchstart', (e) => {
+            const currentTime = new Date().getTime();
+            const tapLength = currentTime - lastTapTime;
+            
+            if (tapLength < DOUBLE_TAP_DELAY && tapLength > 0) {
+                // Double tap detected
+                e.preventDefault();
+                slot.classList.toggle('show-tooltip');
+            }
+            
+            lastTapTime = currentTime;
+            
+            // Single tap on empty slot shows tooltip
+            if (!slot.querySelector('.card')) {
+                e.preventDefault();
+                // Show tooltip on touch
+                slot.classList.add('show-tooltip');
+            }
+        });
+    });
+    
+    // Hide tooltips when tapping elsewhere
+    document.addEventListener('touchstart', (e) => {
+        if (!e.target.closest('.card-slot')) {
+            document.querySelectorAll('.card-slot.show-tooltip').forEach(slot => {
+                slot.classList.remove('show-tooltip');
+            });
+        }
+    });
+}
+
+// Initialize touch support
+function initTouchSupport() {
+    addTouchEventHandlers();
+    addTooltipTouchSupport();
+}
+
+// Reinitialize touch support after card dealing
+deck.addEventListener('click', () => {
+    setTimeout(initTouchSupport, 1000);
+});
+
+// Initialize touch support on page load
+initTouchSupport();
 
 // Context menu event listeners
 dealNewCardBtn.addEventListener('click', dealNewCardToSlot);
