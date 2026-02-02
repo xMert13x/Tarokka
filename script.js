@@ -264,19 +264,25 @@ function createCardElement(cardData, index) {
                 // Update with card-specific tooltip
                 const slotId = getSlotId(slot);
                 
-                // Get or generate the card's tooltip (store it on the card for consistency)
-                let cardTooltip;
-                if (card.dataset.storedTooltip) {
-                    // Use previously stored tooltip
-                    cardTooltip = card.dataset.storedTooltip;
+                // Check if card has a pre-selected description
+                if (card.dataset.selectedDescription) {
+                    // Use the pre-selected description
+                    slot.dataset.tooltip = card.dataset.selectedDescription;
                 } else {
-                    // Generate new tooltip and store it on the card
-                    cardTooltip = getCardTooltip(cardData.name, slotId);
-                    card.dataset.storedTooltip = cardTooltip;
-                }
-                
-                if (cardTooltip) {
-                    slot.dataset.tooltip = cardTooltip;
+                    // Get or generate the card's tooltip (store it on the card for consistency)
+                    let cardTooltip;
+                    if (card.dataset.storedTooltip) {
+                        // Use previously stored tooltip
+                        cardTooltip = card.dataset.storedTooltip;
+                    } else {
+                        // Generate new tooltip and store it on the card
+                        cardTooltip = getCardTooltip(cardData.name, slotId);
+                        card.dataset.storedTooltip = cardTooltip;
+                    }
+                    
+                    if (cardTooltip) {
+                        slot.dataset.tooltip = cardTooltip;
+                    }
                 }
             }
         } else {
