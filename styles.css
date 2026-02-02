@@ -532,7 +532,6 @@ body {
 }
 
 .info-btn:hover {
-    transform: scale(1.1);
     box-shadow: 0 6px 20px rgba(201, 162, 39, 0.6);
 }
 
