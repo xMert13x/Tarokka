@@ -316,6 +316,9 @@ async function dealCards() {
         slots[slot].appendChild(cardElement);
         dealtCards.push(cardData);
     }
+    
+    // Set flag that cards have been dealt
+    cardsDealt = true;
 }
 
 function clearSlots() {
@@ -363,6 +366,15 @@ function clearSlots() {
 }
 
 async function shuffleAndDeal() {
+    // Check if cards have already been dealt
+    if (cardsDealt) {
+        // Show confirmation dialog
+        const confirmed = confirm('Are you sure you wish to change the fates?');
+        if (!confirmed) {
+            return; // Cancel if user says no
+        }
+    }
+    
     deck.classList.add('shuffling');
     
     await new Promise(resolve => setTimeout(resolve, 2000));
@@ -379,6 +391,9 @@ const modal = document.getElementById('cardSelectionModal');
 const modalBody = document.getElementById('modalBody');
 const closeModal = document.getElementById('closeModal');
 let currentSlot = null;
+
+// Track if cards have been dealt
+let cardsDealt = false;
 
 // Context menu elements
 const contextMenu = document.getElementById('contextMenu');
