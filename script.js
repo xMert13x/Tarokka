@@ -169,10 +169,10 @@ function getCardTooltip(cardName, slotId) {
     return cardTooltips[cardName] || '';
 }
 
-// Function to check if a card has multiple descriptions
+// Function to check if a card has multiple descriptions (only for bottom slot)
 function hasMultipleDescriptions(cardName, slotId) {
-    if (slotId === 'bottom' || slotId === 'center') {
-        const slotSuffix = slotId === 'bottom' ? '-Bottom' : '-Center';
+    if (slotId === 'bottom') {
+        const slotSuffix = '-Bottom';
         const slotTooltipKey = cardName + slotSuffix;
         if (cardTooltips[slotTooltipKey]) {
             const tooltip = cardTooltips[slotTooltipKey];
@@ -182,10 +182,10 @@ function hasMultipleDescriptions(cardName, slotId) {
     return false;
 }
 
-// Function to get all descriptions for a card
+// Function to get all descriptions for a card (only for bottom slot)
 function getAllDescriptions(cardName, slotId) {
-    if (slotId === 'bottom' || slotId === 'center') {
-        const slotSuffix = slotId === 'bottom' ? '-Bottom' : '-Center';
+    if (slotId === 'bottom') {
+        const slotSuffix = '-Bottom';
         const slotTooltipKey = cardName + slotSuffix;
         if (cardTooltips[slotTooltipKey]) {
             const tooltip = cardTooltips[slotTooltipKey];
@@ -431,7 +431,7 @@ let currentDescriptionCard = null;
 
 // Function to show description selection modal
 function showDescriptionSelectionModal(card, slot) {
-    const cardName = card.dataset.name;
+    const cardName = card.dataset.cardName;
     const slotId = slot.id.replace('slot-', '');
     
     const descriptions = getAllDescriptions(cardName, slotId);
@@ -455,7 +455,7 @@ function showDescriptionSelectionModal(card, slot) {
         descriptionModalBody.appendChild(optionDiv);
     });
     
-    descriptionModal.classList.add('visible');
+    descriptionModal.style.display = 'block';
 }
 
 // Function to select a description
@@ -469,7 +469,7 @@ function selectDescription(description, index) {
 
 // Function to close description selection modal
 function closeDescriptionSelectionModal() {
-    descriptionModal.classList.remove('visible');
+    descriptionModal.style.display = 'none';
     currentDescriptionSlot = null;
     currentDescriptionCard = null;
 }
