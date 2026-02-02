@@ -887,28 +887,28 @@ document.addEventListener('touchstart', (e) => {
 showTouchHelp.addEventListener('click', (e) => {
     e.preventDefault();
     e.stopPropagation();
-    desktopHelp.style.display = 'none';
-    touchHelp.style.display = 'block';
+    desktopHelp.classList.remove('visible');
+    touchHelp.classList.add('visible');
 });
 
 showTouchHelp.addEventListener('touchstart', (e) => {
     e.preventDefault();
     e.stopPropagation();
-    desktopHelp.style.display = 'none';
-    touchHelp.style.display = 'block';
+    desktopHelp.classList.remove('visible');
+    touchHelp.classList.add('visible');
 });
 
 // Show desktop help
 showDesktopHelp.addEventListener('click', (e) => {
     e.preventDefault();
     e.stopPropagation();
-    touchHelp.style.display = 'none';
-    desktopHelp.style.display = 'block';
+    touchHelp.classList.remove('visible');
+    desktopHelp.classList.add('visible');
 });
 
 showDesktopHelp.addEventListener('touchstart', (e) => {
     e.preventDefault();
     e.stopPropagation();
-    touchHelp.style.display = 'none';
-    desktopHelp.style.display = 'block';
+    touchHelp.classList.remove('visible');
+    desktopHelp.classList.add('visible');
 });
