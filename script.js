@@ -854,13 +854,31 @@ const showTouchHelp = document.getElementById('showTouchHelp');
 const showDesktopHelp = document.getElementById('showDesktopHelp');
 
 // Show touchscreen help
-showTouchHelp.addEventListener('click', () => {
+showTouchHelp.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    desktopHelp.style.display = 'none';
+    touchHelp.style.display = 'block';
+});
+
+showTouchHelp.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
     desktopHelp.style.display = 'none';
     touchHelp.style.display = 'block';
 });
 
 // Show desktop help
-showDesktopHelp.addEventListener('click', () => {
+showDesktopHelp.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    touchHelp.style.display = 'none';
+    desktopHelp.style.display = 'block';
+});
+
+showDesktopHelp.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
     touchHelp.style.display = 'none';
     desktopHelp.style.display = 'block';
 });

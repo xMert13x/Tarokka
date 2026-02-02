@@ -565,7 +565,8 @@ body {
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
 }
 
-.info-btn:hover .info-tooltip {
+.info-btn:hover .info-tooltip,
+.info-tooltip:hover {
     opacity: 1;
     visibility: visible;
 }
