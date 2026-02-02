@@ -718,6 +718,10 @@ function addTooltipTouchSupport() {
             // Only show tooltip on empty slots with single tap
             if (e.touches.length === 1 && !slot.querySelector('.card')) {
                 e.preventDefault();
+                // Hide all other tooltips first
+                document.querySelectorAll('.card-slot.show-tooltip').forEach(s => {
+                    s.classList.remove('show-tooltip');
+                });
                 // Show tooltip on touch
                 slot.classList.add('show-tooltip');
             }
