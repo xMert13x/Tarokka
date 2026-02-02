@@ -273,14 +273,26 @@ body {
     transform: translate(-50%, -50%);
 }
 
-/* Responsive fix for iPad and tablet screens */
-@media (max-width: 1200px) {
+/* Precise iPad-specific fix for slot symmetry */
+@media (min-width: 768px) and (max-width: 1024px) {
+    /* Target iPad screens specifically */
     #slot-left {
-        left: 10%;
+        left: 15%;
     }
     
     #slot-right {
-        right: 10%;
+        right: 15%;
+    }
+}
+
+/* Additional responsive fix for smaller tablets */
+@media (max-width: 767px) {
+    #slot-left {
+        left: 5%;
+    }
+    
+    #slot-right {
+        right: 5%;
     }
 }
 
