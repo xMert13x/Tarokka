@@ -239,10 +239,6 @@ body {
     display: none;
 }
 
-.tooltips-disabled .info-tooltip {
-    display: none;
-}
-
 #slot-top {
     top: 15px;
     left: 42.5%;
